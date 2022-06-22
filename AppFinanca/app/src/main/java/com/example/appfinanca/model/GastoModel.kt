@@ -25,4 +25,17 @@ class GastoModel private constructor(){
         }
     }
 
+    fun updateGasto(gasto: GastoEntity){
+        val count = database.updateGastoInDB(gasto)
+        if(count > 0){
+            gastos = database.retrieveGastosFromDB()
+        }
+    }
+    fun removeGasto(gasto: GastoEntity){
+        val count = database.removeGastoInDB(gasto)
+        if(count > 0){
+            gastos = database.retrieveGastosFromDB()
+        }
+    }
+
 }

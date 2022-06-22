@@ -90,4 +90,42 @@ class DbFinance(context:Context):
         return ganhos
     }
 
+    fun updateGastoInDB(gasto: GastoEntity) : Int{
+        val database = writableDatabase
+        val values = ContentValues()
+        values.put(COL_VALUE,gasto.valor)
+        val count = database.update(DB_TABLE2,
+            values,"$COL_ID =? ",
+            arrayOf(gasto.id.toString()))
+        database.close()
+        return count
+    }
+    fun removeGastoInDB(gasto: GastoEntity) : Int{
+        val database = writableDatabase
+        val count = database.delete(DB_TABLE2,
+            "$COL_ID =? ",
+            arrayOf(gasto.id.toString()))
+        database.close()
+        return count
+    }
+
+    fun updateGanhoInDB(ganho: GanhoEntity) : Int{
+        val database = writableDatabase
+        val values = ContentValues()
+        values.put(COL_VALUE,ganho.valor)
+        val count = database.update(DB_TABLE,
+            values,"$COL_ID =? ",
+            arrayOf(ganho.id.toString()))
+        database.close()
+        return count
+    }
+    fun removeGanhoInDB(ganho: GanhoEntity) : Int{
+        val database = writableDatabase
+        val count = database.delete(DB_TABLE,
+            "$COL_ID =? ",
+            arrayOf(ganho.id.toString()))
+        database.close()
+        return count
+    }
+
 }

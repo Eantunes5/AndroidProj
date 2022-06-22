@@ -3,6 +3,7 @@ package com.example.appfinanca.model
 import android.content.Context
 import com.example.appfinanca.db.DbFinance
 import com.example.appfinanca.entity.GanhoEntity
+import com.example.appfinanca.entity.GastoEntity
 
 class GanhoModel private constructor(){
     var ganhos = ArrayList<GanhoEntity>()
@@ -22,6 +23,19 @@ class GanhoModel private constructor(){
             ganhos = database.retrieveGanhosFromDB()
         }else{
             TODO("tratar erro")
+        }
+    }
+
+    fun updateGanho(ganho: GanhoEntity){
+        val count = database.updateGanhoInDB(ganho)
+        if(count > 0){
+            ganhos = database.retrieveGanhosFromDB()
+        }
+    }
+    fun removeGanho(ganho: GanhoEntity){
+        val count = database.removeGanhoInDB(ganho)
+        if(count > 0){
+            ganhos = database.retrieveGanhosFromDB()
         }
     }
 
