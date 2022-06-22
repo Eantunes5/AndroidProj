@@ -29,7 +29,7 @@ class GanhoAdapter(private val clickListener: OnClickedListener) :
     override fun onCreateViewHolder(parent: ViewGroup,
                                     viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.activity_ganho,
+            .inflate(R.layout.row_card,
                 parent,false)
         return ViewHolder(itemView)
     }
