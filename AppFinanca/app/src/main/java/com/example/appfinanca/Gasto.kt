@@ -13,11 +13,14 @@ import com.example.appfinanca.model.GastoModel
 class Gasto : AppCompatActivity() {
     lateinit var recyclerView: RecyclerView
     lateinit var gastoAdapter: GastoAdapter
+    lateinit var qtd: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_gasto)
         GastoModel.instance.setContext(this)
+        //Pega o texto de qtd
+        qtd = findViewById<View>(R.id.valorGasto).toString()
         recyclerView = findViewById(R.id.recyclerViewGasto)
         gastoAdapter = GastoAdapter(clickListener =
         object : OnClickedListener{
@@ -43,7 +46,8 @@ class Gasto : AppCompatActivity() {
             LinearLayoutManager(this)
         findViewById<Button>(R.id.buttonInsiraGasto).setOnClickListener {
             GastoModel.instance.addGasto(
-                GastoEntity(valor="8000")
+                //Coloca o texto no botão
+                GastoEntity(valor=qtd)
             )
             gastoAdapter.notifyItemInserted(
                 GastoModel.instance.gastos.size - 1
