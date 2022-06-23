@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.appfinanca.adapter.GanhoAdapter
@@ -18,6 +19,7 @@ class Ganho : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ganho)
         GanhoModel.instance.setContext(this)
+        var qtd = findViewById<EditText>(R.id.valorGanho)
         //Coloca o recyclerView como sendo o recyclerVIew que está la na pagina do ganho
         recyclerView = findViewById(R.id.recyclerViewGanho)
         ganhoAdapter = GanhoAdapter(clickListener =
@@ -43,7 +45,7 @@ class Ganho : AppCompatActivity() {
             LinearLayoutManager(this)
         findViewById<Button>(R.id.buttonInsiraGanho).setOnClickListener {
             GanhoModel.instance.addGanho(
-                GanhoEntity(valor="11000")
+                GanhoEntity(valor=qtd.text.toString())
             )
             ganhoAdapter.notifyItemInserted(
                 GanhoModel.instance.ganhos.size - 1

@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.appfinanca.adapter.GastoAdapter
@@ -13,14 +15,13 @@ import com.example.appfinanca.model.GastoModel
 class Gasto : AppCompatActivity() {
     lateinit var recyclerView: RecyclerView
     lateinit var gastoAdapter: GastoAdapter
-    lateinit var qtd: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_gasto)
         GastoModel.instance.setContext(this)
         //Pega o texto de qtd
-        qtd = findViewById<View>(R.id.valorGasto).toString()
+        var qtd = findViewById<EditText>(R.id.valorGasto)
         recyclerView = findViewById(R.id.recyclerViewGasto)
         gastoAdapter = GastoAdapter(clickListener =
         object : OnClickedListener{
@@ -47,7 +48,7 @@ class Gasto : AppCompatActivity() {
         findViewById<Button>(R.id.buttonInsiraGasto).setOnClickListener {
             GastoModel.instance.addGasto(
                 //Coloca o texto no botão
-                GastoEntity(valor=qtd)
+                GastoEntity(valor=qtd.text.toString())
             )
             gastoAdapter.notifyItemInserted(
                 GastoModel.instance.gastos.size - 1
